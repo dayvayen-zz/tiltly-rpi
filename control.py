@@ -27,14 +27,7 @@ print "View your streaming graph here: ", url
 stream = py.Stream(plotly_user_config['plotly_streaming_tokens'][0])
 stream.open()
 
-beacon = {}
 
-def getTemp():
-    return beacon['Temp'] if beacon else 60
-
-
-def getGravity():
-    return beacon['Gravity']/1000 if beacon else 1000
 # first let's try just getting a streaming graph with the gravity data.
 # steps to do that:
 # 1. read in the data using tilt.getFirstTilt()
@@ -43,5 +36,6 @@ def getGravity():
 # maybe i could collect the data and update the plot every so often?
 
 while True:
-    tilt_data = tilt.getFirstTilt()
-    stream.write({'x': dt.datetime.now(), 'y': tilt_data['Temp']})
+    beacon = tilt.getFirstTilt()
+    stream.write({'x': dt.datetime.now(), 'y': beacon['Temp']})
+    time.sleep(0.25)
