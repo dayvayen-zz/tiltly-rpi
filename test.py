@@ -6,6 +6,8 @@ import time
 import tilt
 import datetime as dt
 import plotly
+plotly.offline.init_notebook_mode(connected=True)
+import plotly.offline as py
 
 while True:
     beacon = tilt.getFirstTilt()
