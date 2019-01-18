@@ -14,7 +14,7 @@ stream_token = '231cxdk5rc'
 
 py.sign_in(username, api_key)
 
-trace1 = Scatter(
+trace1 = go.Scatter(
     x=[],
     y=[],
     stream=dict(
