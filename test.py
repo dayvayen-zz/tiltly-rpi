@@ -4,8 +4,6 @@ import json
 import sys
 import time
 import tilt
-import plotly as py # plotly library
-from plotly.graph_objs import *
 import datetime as dt
 
 while True:
