@@ -1,13 +1,9 @@
-from os import uname
-from socket import gethostname
-import json
-import sys
-import time
+
 import tilt
 import datetime as dt
 import plotly
 import plotly.plotly as py # plotly library
-from plotly.graph_objs import Scatter, Layout, Figure # plotly graph objects
+import plotly.graph_objs as go
 import time
 
 
