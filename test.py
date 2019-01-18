@@ -23,11 +23,11 @@ trace1 = go.Scatter(
     )
 )
 
-layout = Layout(
+layout = go.Layout(
     title='Raspberry Pi Streaming Sensor Data'
 )
 
-fig = Figure(data=[trace1], layout=layout)
+fig = go.Figure(data=[trace1], layout=layout)
 
 print py.plot(fig, filename='Raspberry Pi Streaming Example Values')
 
