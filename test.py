@@ -5,15 +5,18 @@ import sys
 import time
 import tilt
 import datetime as dt
-import plotly as py # plotly library
+import plotly
+import plotly.plotly as py # plotly library
 from plotly.graph_objs import Scatter, Layout, Figure # plotly graph objects
 import time
 
-py.sign_in(username, api_key)
+
 
 username = 'dayvayen'
 api_key = 'cxKRDUgmdRm70fXKPNW3'
 stream_token = '231cxdk5rc'
+
+py.sign_in(username, api_key)
 
 trace1 = Scatter(
     x=[],
