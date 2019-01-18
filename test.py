@@ -5,7 +5,7 @@ import sys
 import time
 import tilt
 import datetime as dt
-import plotly as py
+import plotly
 
 while True:
     beacon = tilt.getFirstTilt()
