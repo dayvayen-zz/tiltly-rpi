@@ -5,7 +5,7 @@ import sys
 import time
 import tilt
 import datetime as dt
-import plotly.plotly as py # plotly library
+import plotly as py # plotly library
 from plotly.graph_objs import Scatter, Layout, Figure # plotly graph objects
 import time
 
