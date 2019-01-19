@@ -40,10 +40,10 @@ trace_gravity = go.Scatter(
 
 layout = go.Layout(
     title='Oaty McOatface data',
-    yaxis=YAxis(
+    yaxis=go.YAxis(
         title='Temperature (F)'
     ),
-    yaxis2=YAxis(
+    yaxis2=go.YAxis(
         title='Gravity',
         side='right',
         overlaying="y"
