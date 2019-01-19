@@ -74,5 +74,5 @@ stream_gravity.open()
 while True:
     beacon = tilt.getFirstTilt()
     stream_temperature.write({'x': dt.datetime.now(), 'y': beacon['Temp']})
-    stream_gravity.write({'x': dt.datetime.now(), 'y': beacon['Gravity']})
+    stream_gravity.write({'x': dt.datetime.now(), 'y': beacon['Gravity']/1000})
     time.sleep(30)
