@@ -38,6 +38,6 @@ def getFirstTilt():
             result = {
                 'Color': tiltColor,
                 'Temp': float(beacon['major']),
-                'Gravity': float(beacon['minor'])
+                'Gravity': float(beacon['minor']/1000)
             }
     return result
