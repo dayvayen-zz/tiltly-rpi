@@ -40,13 +40,19 @@ trace_gravity = go.Scatter(
 
 layout = go.Layout(
     title='Oaty McOatface data',
-    yaxis=go.YAxis(
-        title='Temperature (F)'
+    yaxis=dict(
+        title='Temperature'
     ),
-    yaxis2=go.YAxis(
+    yaxis2=dict(
         title='Gravity',
-        side='right',
-        overlaying="y"
+        titlefont=dict(
+            color='rgb(148, 103, 189)'
+        ),
+        tickfont=dict(
+            color='rgb(148, 103, 189)'
+        ),
+        overlaying='y',
+        side='right'
     )
 )
 
@@ -67,5 +73,6 @@ stream_gravity.open()
 
 while True:
     beacon = tilt.getFirstTilt()
-    stream.write({'x': dt.datetime.now(), 'y': beacon['Temp'], 'y2': beacon['Gravity']})
+    stream_temperature.write({'x': dt.datetime.now(), 'y': beacon['Temp']})
+    stream_gravity.write({'x': dt.datetime.now(), 'y': beacon['Gravity']})
     time.sleep(30)
