@@ -19,7 +19,7 @@ trace1 = go.Scatter(
     x=[],
     y=[],
     stream=dict(
-        token=stream_token,
+        token=stream_token[0],
         maxpoints=200
     ),
     name='Temperature'
@@ -29,7 +29,7 @@ trace2 = go.Scatter(
     x=[],
     y=[],
     stream=dict(
-        token=stream_token,
+        token=stream_token[1],
         maxpoints=200
     ),
     name='Gravity',
