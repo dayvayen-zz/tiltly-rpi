@@ -4,8 +4,9 @@ import json
 import sys
 import time
 import tilt
-import plotly as py # plotly library
-from plotly.graph_objs import *
+import plotly
+import plotly.plotly as py # plotly library
+import plotly.graph_objs as go
 import datetime as dt
 
 with open('./config.json') as config_file:
