@@ -76,3 +76,6 @@ while True:
     stream_temperature.write({'x': dt.datetime.now(), 'y': beacon['Temp']})
     stream_gravity.write({'x': dt.datetime.now(), 'y': beacon['Gravity']/1000})
     time.sleep(5)
+
+stream_temperature.close()
+stream_gravity.close()
