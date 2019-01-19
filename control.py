@@ -29,7 +29,7 @@ trace2 = go.Scatter(
     x=[],
     y=[],
     stream=dict(
-        token=plotly_user_config['plotly_streaming_tokens'][0],
+        token=plotly_user_config['plotly_streaming_tokens'][1],
         maxpoints=200
     ),
     name='Gravity',
