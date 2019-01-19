@@ -14,16 +14,53 @@ with open('./config.json') as config_file:
 
     py.sign_in(plotly_user_config["plotly_username"], plotly_user_config["plotly_api_key"])
 
-url = py.plot([
-    {
-        'x': [], 'y': [], 'type': 'scatter',
-        'stream': {
-            'token': plotly_user_config['plotly_streaming_tokens'][0],
-            'maxpoints': 200
-        }
-    }], filename='Raspberry Pi Streaming Example Values')
 
-print "View your streaming graph here: ", url
+trace1 = go.Scatter(
+    x=[],
+    y=[],
+    stream=dict(
+        token=stream_token,
+        maxpoints=200
+    ),
+    name='Temperature'
+)
+
+trace2 = go.Scatter(
+    x=[],
+    y=[],
+    stream=dict(
+        token=stream_token,
+        maxpoints=200
+    ),
+    name='Gravity',
+    yaxis='y2'
+)
+
+data = [trace1, trace2]
+
+layout = go.Layout(
+    title='Double Y Axis Example',
+    yaxis=dict(
+        title='Temperature'
+    ),
+    yaxis2=dict(
+        title='Gravity',
+        titlefont=dict(
+            color='rgb(148, 103, 189)'
+        ),
+        tickfont=dict(
+            color='rgb(148, 103, 189)'
+        ),
+        overlaying='y',
+        side='right'
+    )
+)
+fig = go.Figure(data=data, layout=layout)
+
+plot_url = py.plot(fig, filename='beer')
+
+
+print "View your streaming graph here: ", plot_url
 
 stream = py.Stream(plotly_user_config['plotly_streaming_tokens'][0])
 stream.open()
@@ -38,5 +75,5 @@ stream.open()
 
 while True:
     beacon = tilt.getFirstTilt()
-    stream.write({'x': dt.datetime.now(), 'y': beacon['Temp']})
+    stream.write({'x': dt.datetime.now(), 'y': beacon['Temp'], 'y2': beacon['Gravity']})
     time.sleep(0.25)
