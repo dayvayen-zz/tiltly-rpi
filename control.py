@@ -59,10 +59,10 @@ plot_url = py.plot(fig, filename='beer')
 print "View your streaming graph here: ", plot_url
 
 stream_temperature = py.Stream(stream_token_temperature)
-stream.open()
+stream_temperature.open()
 
 stream_gravity = py.Stream(stream_token_gravity)
-stream.open()
+stream_gravity.open()
 
 
 while True:
