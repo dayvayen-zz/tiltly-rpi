@@ -3,8 +3,7 @@ from sqlite3 import Error
 import tilt
 import datetime as dt
 
-db_file = raw_input("Enter database name: ")
-beerName = raw_input("Enter beer table name: ")
+
 
 def create_connection(db_file):
     """ create a database connection to the SQLite database
@@ -34,6 +33,8 @@ def addData(conn, data):
     return cur.lastrowid
 
 def updateBeerTable():
+    db_file = raw_input("Enter database name: ")
+    beerName = raw_input("Enter beer table name: ")
     conn = create_connection(db_file)
     beacon = tilt.getFirstTilt()
     with conn:
