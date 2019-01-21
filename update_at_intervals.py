@@ -9,4 +9,5 @@ interval = float(raw_input("How many minutes between updates? ")) * 60
 loop = Timeloop()
 
 @loop.job(interval = timedelta(seconds = interval))
-updateBeerTable()
+def intervalUpdate():
+    updateBeerTable(db_file, beerName)
