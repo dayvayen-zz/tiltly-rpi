@@ -30,7 +30,7 @@ def add_data(conn, beerName, data):
                                             gravity)
             VALUES(?,?,?)"""
     cur = conn.cursor()
-    cur.execute(sql, beerName)
+    cur.execute(sql, beerName, data)
     return cur.lastrowid
 
 def main():
