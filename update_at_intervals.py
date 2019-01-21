@@ -8,7 +8,7 @@ interval = float(raw_input("How many minutes between updates? ")) * 60
 
 try:
     while True:
-        updateBeerTable()
+        updateBeerTable(db_file, beerName)
         time.sleep(interval)
 except KeyboardInterrupt:
     print('Manual break by user')
