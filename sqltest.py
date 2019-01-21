@@ -14,3 +14,5 @@ def getBeerRecords(db_file, beerName, n_records):
     rows = cur.fetchall()
     for row in rows:
         print(row)
+
+getBeerRecords(db_file, beerName, n_records)
