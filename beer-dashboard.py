@@ -13,23 +13,22 @@ external_css = ["https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.
                 "https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i"]
 
 app = dash.Dash(
-    'beer-app',
+    __name__,
     external_stylesheets=external_css
 )
 
-server = app.server
+# server = app.server # deploy in a Heroku app, i think.
 
 app.layout = html.Div([
   html.Div([
     html.H2("Beer data")
-  ], className='banner'),
-  html.Div([
+    ], className='banner'),
     html.Div([
-      html.H3("WIND SPEED (mph)")
-      ], className='Title'),
-    html.Div([
-      dcc.Graph(id='wind-speed'),
-  ], className='twelve columns wind-speed'),
-  dcc.Interval(id='wind-speed-update', interval=1000, n_intervals=0),
-], className='row wind-speed-row')
+      dcc.Graph(id='tilt-data'),
+  ]),
+  dcc.Interval(id='tilt-interval', interval=1000, n_intervals=0),
 ])
+
+@app.callback(Output('tilt-data', 'figure'),
+              [Input('tilt-interval', 'n-intervals')])
+def update_tilt_data(n):
