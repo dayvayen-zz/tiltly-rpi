@@ -40,4 +40,5 @@ def updateBeerTable():
     with conn:
         data = (dt.datetime.now(), beacon['Temp'], beacon['Gravity']/1000)
         addData(conn, data)
-        return(print("Added data at " + dt.datetime.now()))
+        print("Added data at " + dt.datetime.now())
+        return None
