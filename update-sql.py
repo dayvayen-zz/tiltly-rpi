@@ -21,7 +21,7 @@ def create_connection(db_file):
     return None
 
 
-def add_data(conn, data):
+def addData(conn, data):
     """ take beer data from tilt and add it
         to the table
     """
@@ -33,12 +33,10 @@ def add_data(conn, data):
     cur.execute(sql, data)
     return cur.lastrowid
 
-def main():
+def updateBeerTable():
     conn = create_connection(db_file)
     beacon = tilt.getFirstTilt()
     with conn:
-        data = (dt.datetime.now(), beacon['Temp'], beacon['Gravity'])
-        add_data(conn, data)
-
-if __name__ == '__main__':
-    main()
+        data = (dt.datetime.now(), beacon['Temp'], beacon['Gravity']/1000)
+        addData(conn, data)
+        return(print("Added data at " + dt.datetime.now()))
