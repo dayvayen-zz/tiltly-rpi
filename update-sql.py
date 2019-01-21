@@ -5,6 +5,7 @@ import datetime as dt
 
 db_file = raw_input("Enter database name: ")
 beerName = raw_input("Enter beer table name: ")
+
 def create_connection(db_file):
     """ create a database connection to the SQLite database
         specified by db_file
@@ -19,7 +20,6 @@ def create_connection(db_file):
 
     return None
 
-    def
 
 def add_data(conn, beerName, data):
     """ take beer data from tilt and add it
