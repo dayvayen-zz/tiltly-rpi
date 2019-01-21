@@ -1,4 +1,4 @@
-import updateSQL
+from updateSQL import updateBeerTable
 import time
 
 
