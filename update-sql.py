@@ -21,7 +21,7 @@ def create_connection(db_file):
     return None
 
 
-def add_data(conn, beerName, data):
+def add_data(conn, data):
     """ take beer data from tilt and add it
         to the table
     """
@@ -30,7 +30,7 @@ def add_data(conn, beerName, data):
                                             gravity)
             VALUES(?,?,?)"""
     cur = conn.cursor()
-    cur.execute(sql, beerName, data)
+    cur.execute(sql, data)
     return cur.lastrowid
 
 def main():
@@ -38,7 +38,7 @@ def main():
     beacon = tilt.getFirstTilt()
     with conn:
         data = (dt.datetime.now(), beacon['Temp'], beacon['Gravity'])
-        add_data(conn, beerName, data)
+        add_data(conn, data)
 
 if __name__ == '__main__':
     main()
