@@ -12,4 +12,3 @@ try:
         time.sleep(interval)
 except KeyboardInterrupt:
     print('Manual break by user')
-    return
