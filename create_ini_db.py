@@ -31,18 +31,15 @@ def sql_create_beer_table(conn, create_table_sql):
         print(e)
 
 def main(database, beerName):
-    sql_create_beer_table("create table " + beerName + """  (
-      time datetime,
-      temperature float,
-      gravity float
-    );""")
+
     # create a database connection
     conn = create_connection(database)
     if conn is not None:
-        # create projects table
-        create_table(conn, sql_create_projects_table)
-        # create tasks table
-        create_table(conn, sql_create_tasks_table)
+        sql_create_beer_table(conn, "create table " + beerName + """  (
+          time datetime,
+          temperature float,
+          gravity float
+        );""")
     else:
         print("Error! cannot create the database connection.")
 
