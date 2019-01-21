@@ -33,7 +33,7 @@ def sql_create_beer_table(conn, create_table_sql):
 def main(db_file, beerName):
 
     # create a database connection
-    conn = create_connection(database)
+    conn = create_connection(db_file)
     if conn is not None:
         sql_create_beer_table(conn, "create table " + beerName + """  (
           time datetime,
