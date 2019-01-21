@@ -34,4 +34,3 @@ def updateBeerTable(db_file, beerName):
         data = (dt.datetime.now(), beacon['Temp'], beacon['Gravity']/1000)
         addData(conn, beerName, data)
         print("Added data at " + dt.datetime.now())
-        return None
