@@ -1,7 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
-database = raw_input("File path to database: ")
+db_file = raw_input("Database name: ")
 beerName = raw_input("What are you naming your beer? ")
 
 def create_connection(db_file):
@@ -30,7 +30,7 @@ def sql_create_beer_table(conn, create_table_sql):
     except Error as e:
         print(e)
 
-def main(database, beerName):
+def main(db_file, beerName):
 
     # create a database connection
     conn = create_connection(database)
@@ -45,4 +45,4 @@ def main(database, beerName):
 
 
 if __name__ == '__main__':
-    main(database, beerName)
+    main(db_file, beerName)
