@@ -30,8 +30,7 @@ def sql_create_beer_table(conn, create_table_sql):
     except Error as e:
         print(e)
 
-def main(db_file, beerName):
-
+def main():
     # create a database connection
     conn = create_connection(db_file)
     if conn is not None:
@@ -45,4 +44,4 @@ def main(db_file, beerName):
 
 
 if __name__ == '__main__':
-    main(db_file, beerName)
+    main()
