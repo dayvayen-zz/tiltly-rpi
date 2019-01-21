@@ -1,7 +1,7 @@
 import sqlite3
 from updateSQL import create_connection
 
-n_records = float(raw_input("Number of records to show: "))
+n_records = raw_input("Number of records to show: ")
 db_file = raw_input("Enter database name: ")
 beerName = raw_input("Enter beer table name: ")
 
