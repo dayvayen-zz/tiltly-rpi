@@ -40,13 +40,21 @@ def getMaxGravity(db_file, beerName):
     maxGravity = cur.fetchone()[0]
     return(maxGravity)
 
+def getMinGravity(db_file, beerName):
+    conn = create_connection(db_file)
+    cur = conn.cursor()
+    cur.execute("SELECT MIN(gravity) FROM " + beerName)
+    minGravity = cur.fetchone()[0]
+    return(minGravity)
+
 beerData = updateData(db_file, beerName, n_records)
 maxGravity = getMaxGravity(db_file, beerName)
+minGravity = getMinGravity(db_file, beerName)
 
 app.layout = html.Div(children = [
     html.H1(children = "some data from a tilt hydrometer"),
-    dcc.Input(id = 'og-value', value = maxGravity, type = 'float'),
     html.Div(id = 'og-toggle'),
+    dcc.Input(id = 'og-value', value = maxGravity, type = 'float'),
     html.Div(id = 'abv-value'),
     dcc.Graph(id = "temperature-graph",
               figure = {
@@ -80,8 +88,7 @@ def update_og_toggle(input_value):
     return 'Please enter your original gravity if it is not {}.'.format(maxGravity)
 
 def update_abv(input_value):
-    current_gravity = pd.DataFrame.min(beerData['gravity'])
-    abv = (maxGravity - current_gravity) * 1.3125
+    abv = (input_value - minGravity) * 1.3125
     return 'Your current ABV is {} \%.'.format(abv)
 
 
