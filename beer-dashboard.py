@@ -7,28 +7,60 @@ from plotly.graph_objs import *
 import datetime as dt
 import time
 import tilt
+from updateSQL import create_connection
+import sqlite3
+import pandas as pd
+from dash.dependencies import Input, Output
 
-external_css = ["https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
-                "https://fonts.googleapis.com/css?family=Raleway:400,400i,700,700i",
-                "https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i"]
+
+external_css = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(
     __name__,
     external_stylesheets=external_css
 )
 
-# server = app.server # deploy in a Heroku app, i think.
+db_file = "tiltdata.db"
+beerName = "oaty"
+n_records = 10
 
-app.layout = html.Div([
-  html.Div([
-    html.H2("Beer data")
-    ], className='banner'),
-    html.Div([
-      dcc.Graph(id='tilt-data'),
-  ]),
-  dcc.Interval(id='tilt-interval', interval=1000, n_intervals=0),
+server = app.server # deploy in a Heroku app, i think.
+
+def updateData(db_file, beerName, n_records):
+    conn = create_connection(db_file)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM " + beerName + " ORDER BY time DESC LIMIT " + n_records)
+    rows = cur.fetchall()
+    labels = ['time', 'temperature', 'gravity']
+    df = pd.DataFrame.from_records(rows, columns=labels)
+    return(df)
+
+
+beerData = updateData(db_file, beerName, n_records)
+
+
+app.layout = html.Div(children = [
+    html.H1(children = "some data from a tilt hydrometer"),
+    dcc.Graph(id = "temperature-graph",
+              figure = {
+                'data': [
+                    {'x': beerData['time'], 'y': beerData['temperature'], 'type': 'scatter'}
+                ],
+                'layout': {
+                    'title': 'Temperature'
+                }
+        }),
+    dcc.Graph(id = "gravity-graph",
+              figure = {
+                'data': [
+                    {'x': beerData['time'], 'y': beerData['gravity'], 'type': 'scatter'}
+                ],
+                'layout' : {
+                    'title': 'Specific gravity'
+                }
+              })
 ])
 
-@app.callback(Output('tilt-data', 'figure'),
-              [Input('tilt-interval', 'n-intervals')])
-def update_tilt_data(n):
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
