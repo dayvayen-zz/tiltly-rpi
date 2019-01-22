@@ -77,7 +77,7 @@ app.layout = html.Div(children = [
     [Input(component_id = 'og-value', component_property = 'value')]
 )
 def update_og_toggle(input_value):
-    return 'Please enter your original gravity if it is not {}.'.format(initial_value)
+    return 'Please enter your original gravity if it is not {}.'.format(maxGravity)
 
 def update_abv(input_value):
     current_gravity = pd.DataFrame.min(beerData['gravity'])
