@@ -3,7 +3,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 import datetime as dt
 import time
-from updateSQL import create_connection
 import sqlite3
 import pandas as pd
 from dash.dependencies import Input, Output
@@ -16,6 +15,15 @@ server = app.server
 db_file = "tiltdata.db"
 beerName = "oaty"
 n_records = 10
+
+def create_connection(db_file):
+    try:
+        conn = sqlite3.connect(db_file)
+        return conn
+    except Error as e:
+        print(e)
+
+    return None
 
 def updateData(db_file, beerName, n_records):
     conn = create_connection(db_file)
