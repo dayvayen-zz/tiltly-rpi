@@ -80,13 +80,14 @@ app.layout = html.Div(children = [
     Output(component_id = 'og-toggle', component_property = 'children'),
     [Input(component_id = 'og-value', component_property = 'value')]
 )
+
+def update_og_toggle(input_value):
+    return 'Please enter your original gravity if it is not {}.'.format(maxGravity)
+
 @app.callback(
     Output(component_id = 'abv-value', component_property = 'children'),
     [Input(component_id = 'og-value', component_property = 'value')]
 )
-def update_og_toggle(input_value):
-    return 'Please enter your original gravity if it is not {}.'.format(maxGravity)
-
 def update_abv(input_value):
     abv = (input_value - minGravity) * 1.3125
     return 'Your current ABV is {} \%.'.format(abv)
