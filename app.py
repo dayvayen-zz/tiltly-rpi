@@ -22,7 +22,6 @@ def create_connection(db_file):
         return conn
     except Error as e:
         print(e)
-
     return None
 
 def updateData(db_file, beerName, n_records):
@@ -34,9 +33,21 @@ def updateData(db_file, beerName, n_records):
     df = pd.DataFrame.from_records(rows, columns=labels)
     return(df)
 
+def getMaxGravity(db_file, beerName):
+    conn = create_connection(db_file)
+    cur = conn.cursor()
+    cur.execute("SELECT MAX(gravity) FROM " + beerName)
+    maxGravity = cur.fetchone()[0]
+    return(maxGravity)
+
 beerData = updateData(db_file, beerName, n_records)
+maxGravity = getMaxGravity(db_file, beerName)
+
 app.layout = html.Div(children = [
     html.H1(children = "some data from a tilt hydrometer"),
+    dcc.Input(id = 'og-value', value = maxGravity, type = 'float'),
+    html.Div(id = 'og-toggle'),
+    html.Div(id = 'abv-value'),
     dcc.Graph(id = "temperature-graph",
               figure = {
                 'data': [
@@ -56,6 +67,22 @@ app.layout = html.Div(children = [
                 }
               })
 ])
+
+@app.callback(
+    Output(component_id = 'og-toggle', component_property = 'children'),
+    [Input(component_id = 'og-value', component_property = 'value')]
+)
+@app.callback(
+    Output(component_id = 'abv-value', component_property = 'children'),
+    [Input(component_id = 'og-value', component_property = 'value')]
+)
+def update_og_toggle(input_value):
+    return 'Please enter your original gravity if it is not {}.'.format(initial_value)
+
+def update_abv(input_value):
+    current_gravity = pd.DataFrame.min(beerData['gravity'])
+    abv = (maxGravity - current_gravity) * 1.3125
+    return 'Your current ABV is {} \%.'.format(abv)
 
 
 if __name__ == '__main__':
