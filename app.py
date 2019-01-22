@@ -79,7 +79,7 @@ app.layout = html.Div(children = [
                 }
               })
               ],
-              style={'width': '48%', 'float': 'right', 'display': 'inline-block'}))
+              style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
 ])
 
 @app.callback(
