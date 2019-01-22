@@ -52,7 +52,6 @@ prometheus-client==0.5.0
 prompt-toolkit==1.0.15
 ptyprocess==0.6.0
 pyasn1==0.1.9
-PyBluez==0.18
 pycrypto==2.6.1
 Pygments==2.3.1
 pygobject==3.22.0
