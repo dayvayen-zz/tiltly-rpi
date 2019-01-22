@@ -89,7 +89,7 @@ def update_og_toggle(input_value):
     [Input(component_id = 'og-value', component_property = 'value')]
 )
 def update_abv(input_value):
-    abv = (float(input_value) - float(minGravity)) * 1.3125
+    abv = round((float(input_value) - float(minGravity)) * 131.25, 2)
     return 'Your current ABV is {} %.'.format(abv)
 
 
