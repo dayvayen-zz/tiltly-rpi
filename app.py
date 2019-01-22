@@ -14,7 +14,7 @@ server = app.server
 
 db_file = "tiltdata.db"
 beerName = "oaty"
-n_records = 10
+n_records = "10"
 
 def create_connection(db_file):
     try:
