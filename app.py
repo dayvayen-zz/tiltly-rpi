@@ -14,7 +14,7 @@ server = app.server
 
 db_file = "tiltdata.db"
 beerName = "oaty"
-n_records = "10"
+n_records = "20"
 
 def create_connection(db_file):
     try:
@@ -52,20 +52,24 @@ maxGravity = getMaxGravity(db_file, beerName)
 minGravity = getMinGravity(db_file, beerName)
 
 app.layout = html.Div(children = [
-    html.H1(children = "some data from a tilt hydrometer"),
+    html.H1(children = "Tilt hydrometer data for beer " + beerName),
     html.Div(id = 'og-toggle'),
     dcc.Input(id = 'og-value', value = maxGravity, type = 'float'),
     html.Div(id = 'abv-value'),
-    dcc.Graph(id = "temperature-graph",
-              figure = {
-                'data': [
-                    {'x': beerData['time'], 'y': beerData['temperature'], 'type': 'scatter'}
-                ],
-                'layout': {
-                    'title': 'Temperature'
-                }
-        }),
-    dcc.Graph(id = "gravity-graph",
+    html.Div([
+        dcc.Graph(id = "temperature-graph",
+                  figure = {
+                    'data': [
+                        {'x': beerData['time'], 'y': beerData['temperature'], 'type': 'scatter'}
+                    ],
+                    'layout': {
+                        'title': 'Temperature'
+                    }
+            })
+            ],
+            style={'width': '48%', 'display': 'inline-block'}),
+    html.Div([
+        dcc.Graph(id = "gravity-graph",
               figure = {
                 'data': [
                     {'x': beerData['time'], 'y': beerData['gravity'], 'type': 'scatter'}
@@ -74,6 +78,8 @@ app.layout = html.Div(children = [
                     'title': 'Specific gravity'
                 }
               })
+              ],
+              style={'width': '48%', 'float': 'right', 'display': 'inline-block'}))
 ])
 
 @app.callback(
