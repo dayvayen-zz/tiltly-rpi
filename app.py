@@ -50,9 +50,11 @@ def getMinGravity(db_file, beerName):
 beerData = updateData(db_file, beerName, n_records)
 maxGravity = getMaxGravity(db_file, beerName)
 minGravity = getMinGravity(db_file, beerName)
+updateTime = beerData['time'].max()
 
 app.layout = html.Div(children = [
     html.H1(children = "Tilt hydrometer data for beer " + beerName),
+    html.H2(children = "I was last updated at " + str(updateTime)),
     html.Div(id = 'og-toggle'),
     dcc.Input(id = 'og-value', value = maxGravity, type = 'float'),
     html.Div(id = 'abv-value'),
