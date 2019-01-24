@@ -10,7 +10,6 @@ from dash.dependencies import Input, Output
 external_css = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_css)
-server = app.server
 
 db_file = "tiltdata.db"
 beerName = "oaty"
@@ -102,4 +101,4 @@ def update_abv(input_value):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True, host='0.0.0.0')
